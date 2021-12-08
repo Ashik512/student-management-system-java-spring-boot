@@ -9,29 +9,63 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-   <div class="container">
-       <div class="row">
-           <h1>Students List</h1>
-       </div>
-       <table class="table table-bordered table-striped">
-           <thead class="thead-dark">
-           <tr>
-               <th scope="col">First Name</th>
-               <th scope="col">Last Name</th>
-               <th scope="col">Email</th>
-               <th scope="col">Action</th>
-           </tr>
-           </thead>
-           <tbody>
-               <tr th:each = "student : ${students}">
-                   <td th:text = "${student.firstName}"></td>
-                   <td th:text = "${student.lastName}"></td>
-                   <td th:text = "${student.email}"></td>
-                   <td class="btn btn-primary">Edit</td>
-                   <td class="btn btn-dark">Delete</td>
-               </tr>
-           </tbody>
-       </table>
-   </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+        <a class="navbar-brand" th:href="@{/students}">Sms</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/students/add}">Add Students</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+        </div>
+    </nav>
+
+<div class="container">
+    <div class="row">
+        <h1>Students List</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <a th:href="@{/students/add}" class="btn btn-primary mb-2">Add Students</a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Student First Name</th>
+            <th scope="col">Student Last Name</th>
+            <th scope="col">Student Email</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.firstName}"></td>
+            <td th:text="${student.lastName}"></td>
+            <td th:text="${student.email}"></td>
+            <td class="btn btn-sm btn-primary w-50">
+                <a th:href="@{/students/edit/{id}(id=${student.id})}" class="text-light">Update</a>
+            </td>
+            <td class="btn btn-sm btn-dark w-50 text-decoration-none text-light">
+                <a th:href="@{/students/{id}(id=${student.id})}" class="text-light">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
