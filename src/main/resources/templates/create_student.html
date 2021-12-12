@@ -30,23 +30,26 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6 mt-5 card">
+            <h3 th:text="${message}" align="center" class="text-success mt-3"></h3>
             <h2 class="text-center mt-3">Add Student</h2>
             <div class="card-body">
                 <form th:action="@{/students}" th:object="${student}" method="POST">
 
                     <div class="form-group">
-                        <label for="first_name">First Name</label>
-                        <input type="text" name="firstName" th:field="*{firstName}" class="form-control" required>
+                        <label>First Name</label>
+                        <input type="text" name="firstName" th:field="*{firstName}" class="form-control">
+                        <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger">Name error</p>
                     </div>
 
                     <div class="form-group">
-                        <label for="last_name">Last Name</label>
-                        <input type="text" name="firstName" th:field="*{lastName}" class="form-control" required>
+                        <label>Last Name</label>
+                        <input type="text" name="firstName" th:field="*{lastName}" class="form-control">
                     </div>
 
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" th:field="*{email}" class="form-control" required>
+                        <label>Email</label>
+                        <input type="text" name="email" th:field="*{email}" class="form-control">
+                        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger">Email error</p>
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>

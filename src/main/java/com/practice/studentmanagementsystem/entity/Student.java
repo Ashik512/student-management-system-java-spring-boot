@@ -1,8 +1,11 @@
 package com.practice.studentmanagementsystem.entity;
 
-import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import javax.validation.groups.Default;
 
 @Entity
 @Table(name = "students")
@@ -12,13 +15,19 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty(groups = Onupdate.class)
     @Column(name = "first_name", nullable = false)
+    @NotEmpty(message = "First name must not be empty")
+    @Size(min = 2, max = 20, message = "Name must be at least 2 characters")
     private String firstName;
 
     @Column(name = "last_name")
     private String lastName;
 
     @Column(name = "email")
+    @NotEmpty(message = "Email field must not be empty!")
+    @Email(regexp = "^(.+)@(\\S+)$", message = "Invalid email format!")
+    @NotEmpty(groups = Onupdate.class)
     private String email;
 
 

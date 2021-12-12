@@ -10,8 +10,8 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
         <a class="navbar-brand" th:href="@{/students}">Sms</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,8 +29,8 @@
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
-        </div>
-    </nav>
+    </div>
+</nav>
 
 <div class="container">
     <div class="row">
@@ -61,11 +61,47 @@
                 <a th:href="@{/students/edit/{id}(id=${student.id})}" class="text-light">Update</a>
             </td>
             <td class="btn btn-sm btn-danger w-50 text-decoration-none text-light">
-                <a th:href="@{/students/{id}(id=${student.id})}" class="text-light">Delete</a>
+                <!--<a th:href="@{/students/{id}(id=${student.id})}" class="text-light">Delete</a>-->
+                <a th:href="@{/students/{id}(id=${student.id})}" id="deleteBtn">Delete</a>
             </td>
         </tr>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalExample">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Student</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                        <div class="modal-body">
+                            Are you sure to delete?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <a href="" class="btn btn-primary" id="delRef">Yes,Delete</a>
+                        </div>
+                </div>
+            </div>
+        </div>
         </tbody>
     </table>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<script>
+   $(document).ready(function() {
+       $('.table #deleteBtn').on('click',function(event){
+          event.preventDefault();
+          $('#modalExample').modal('show');
+          let href = $(this).attr('href');
+          console.log(href);
+          $('#modalExample #delRef').attr('href',href);
+       });
+   });
+</script>
 </body>
 </html>

@@ -1,2 +1,7 @@
-package com.practice.studentmanagementsystem.entity;public interface Onupdate {
+package com.practice.studentmanagementsystem.entity;
+
+import javax.validation.groups.Default;
+
+public interface Onupdate extends Default {
+
 }

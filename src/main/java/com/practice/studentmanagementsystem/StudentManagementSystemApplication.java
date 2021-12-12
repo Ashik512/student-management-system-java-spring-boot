@@ -1,6 +1,5 @@
 package com.practice.studentmanagementsystem;
 
-import com.practice.studentmanagementsystem.entity.Student;
 import com.practice.studentmanagementsystem.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
