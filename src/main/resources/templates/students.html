@@ -42,7 +42,7 @@
             <a th:href="@{/students/add}" class="btn btn-primary mb-2">Add Students</a>
         </div>
     </div>
-
+  
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
@@ -97,6 +97,7 @@
        $('.table #deleteBtn').on('click',function(event){
           event.preventDefault();
           $('#modalExample').modal('show');
+          //let href = $(this).attr('href');
           let href = $(this).attr('href');
           console.log(href);
           $('#modalExample #delRef').attr('href',href);

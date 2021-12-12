@@ -1,14 +1,15 @@
 package com.practice.studentmanagementsystem.controller;
 
+import com.practice.studentmanagementsystem.entity.Onupdate;
 import com.practice.studentmanagementsystem.entity.Student;
 import com.practice.studentmanagementsystem.service.StudentService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.sql.SQLOutput;
 
 @Controller
 public class StudentController {
@@ -63,28 +64,28 @@ public class StudentController {
 
     //Updating students data
     @PostMapping("/students/{id}")
-    public String updateStudent(@Valid @PathVariable Long id, @ModelAttribute("student") Student student, BindingResult error,Model model) {
-        if (error.hasErrors()){
-            //System.out.println("updating failed");
-            return "create_student";
-        }
-        //getting student by id from database
-     /*   Student existingStudent = studentService.getStudentById(id);
+    public String updateStudent(@Valid @ModelAttribute("student") Student student,BindingResult result,@PathVariable Long id) {
+        if (result.hasErrors()) {
+            return "edit_student";
+        } else {
 
-        existingStudent.setId(id);
-        existingStudent.setFirstName(student.getFirstName());
-        existingStudent.setLastName(student.getLastName());
-        existingStudent.setEmail(student.getEmail());
-        //updating student
-        studentService.updateStudent(existingStudent);*/
-        System.out.println("updating failed");
-        return "edit_student";
+            //getting student by id from database
+            Student existingStudent = studentService.getStudentById(id);;
+            existingStudent.setId(id);
+            existingStudent.setFirstName(student.getFirstName());
+            existingStudent.setLastName(student.getLastName());
+            existingStudent.setEmail(student.getEmail());
+
+            //updating student
+            studentService.updateStudent(existingStudent);
+
+            return "redirect:/students";
+        }
     }
 
     //deleting students data
     @GetMapping("/students/{id}")
     public String deleteStudent(@PathVariable Long id) {
-        System.out.println(id);
         studentService.deleteStudentById(id);
         return "redirect:/students";
     }
